@@ -13,6 +13,7 @@ connectDB();
 
 const routesTws = require('./routes/tw');
 const routesUsers = require('./routes/user');
+const routesProducts = require('./routes/product')
 
 const server = express();
 
@@ -27,6 +28,7 @@ server.get('/', (req, res) => {
 
 server.use('/', routesTws);
 server.use('/', routesUsers);
+server.use('/api', routesProducts);
 
 server.use(notFound);
 server.use(errorHandler);
