@@ -42,7 +42,11 @@ Router.post('/products', (req, res, next) => {
 Router.put('/products/:productId', (req, res, next) => {
     const productId = req.params.productId;
 
-    productModel.updateOne({_id: productId}, {$set: {body: req.body.body}})
+    productModel.updateOne({_id: productId}, {$set: {
+        name: req.body.name,
+        description: req.body.description,
+        price: req.body.price
+    }})
     .then(tw => {res.status(200).send("Produit bien modifié.")})
     .catch(error => {next(error)});
 });
