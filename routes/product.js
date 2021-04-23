@@ -28,8 +28,9 @@ Router.get('/products/:productId', (req, res, next) => {
 // POST: /api/products
 Router.post('/products', (req, res, next) => {
     const product = new productModel({
-        body: req.body.body,
-        user: req.body.userId,
+        name: req.body.name,
+        description: req.body.description,
+        price: req.body.price
     });
 
     product.save()
