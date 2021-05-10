@@ -1,5 +1,6 @@
 const express = require('express');
-const userModel = require('../models/user');;
+const userModel = require('../models/user');
+const chekAuth = require('../middlewares/auth');
 
 const Router = express.Router();
 
@@ -14,6 +15,12 @@ Router.post('/api/users', (req, res, next) => {
     user.save()
     .then(tw => {res.status(200).send(user)})
     .catch(error => {next(error)});
+});
+
+// GET: /api/users/me
+Router.get('/api/users/me', chekAuth, (req, res, next) => {
+    console.log(req.session);
+    res.status(200).send(req.session.user);
 });
 
 module.exports = Router;
