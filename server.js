@@ -5,8 +5,8 @@ const morgan        = require('morgan');
 const cors          = require('cors');
 const helmet        = require('helmet');
 const cookieParser  = require('cookie-parser');
-const session       = require('express-session');
 const { v4:uuid }   = require('uuid');
+const session       = require('express-session');
 
 const connectDB     = require('./middlewares/connectDB');
 const errorHandler  = require('./middlewares/errorHandler');
@@ -16,7 +16,7 @@ connectDB();
 
 const routesTws     = require('./routes/tw');
 const routesUsers   = require('./routes/user');
-const routeAuth     = require('./routes/auth')
+const routesAuth    = require('./routes/auth');
 
 const server = express();
 
@@ -26,17 +26,17 @@ server.use(cors());
 server.use(cookieParser());
 server.use(session({
     genid: (req) => {
-        return uuid()
+        return uuid();
     },
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
-    name:'session',
+    name: "ssid",
     cookie: {
         secure: true,
         httpOnly: true
     }
-}))
+}));
 server.use(express.json());
 
 server.get('/', (req, res) => {
@@ -45,7 +45,7 @@ server.get('/', (req, res) => {
 
 server.use('/', routesTws);
 server.use('/', routesUsers);
-server.use('/', routeAuth);
+server.use('/api', routesAuth);
 
 server.use(notFound);
 server.use(errorHandler);

@@ -3,7 +3,8 @@ const mongoose = require('mongoose');
 const connectDB = () => {
     mongoose.connect('mongodb+srv://twUser:twUser@cluster0.q2ymj.mongodb.net/youtube_video?retryWrites=true&w=majority', {
         useNewUrlParser: true,
-        useUnifiedTopology: true
+        useUnifiedTopology: true,
+        useCreateIndex: true
     });
 
     const db = mongoose.connection;

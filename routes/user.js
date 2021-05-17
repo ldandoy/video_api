@@ -1,6 +1,6 @@
 const express = require('express');
 const userModel = require('../models/user');
-const chekAuth = require('../middlewares/auth');
+const checkSession = require('../middlewares/checkSession');
 
 const Router = express.Router();
 
@@ -18,9 +18,8 @@ Router.post('/api/users', (req, res, next) => {
 });
 
 // GET: /api/users/me
-Router.get('/api/users/me', chekAuth, (req, res, next) => {
-    console.log(req.session);
-    res.status(200).send(req.session.user);
-});
+Router.get('/api/users/me', checkSession, (req, res, next) => {
+    res.status(200).json(req.session.user);
+})
 
 module.exports = Router;
